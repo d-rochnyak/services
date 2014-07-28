@@ -1,0 +1,8 @@
+{
+	"port": 8080,
+
+	"mysql": {
+		"uri": "mysql://root:777@localhost/db_app_services",
+		"options": {}
+	}
+}

@@ -1,0 +1,44 @@
+{{ layout('layout') }}
+{{ block('title', 'Услуги') }}
+
+
+<div class="col-xs-12 col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2 text-center">
+	<div id="services"></div>
+</div>
+
+<script type="text/html" id="service-template">
+	<div class="actions">
+		<a class="add" href="#"><span class="glyphicon glyphicon-plus"></span></a>
+		<a class="edit" href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+		<a class="delete" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+	</div>
+
+	<span class="name"><%=name%></span>
+</script>
+
+<script type="text/html" id="modal-win-template">
+	<div id="modal-win">
+		<div class="content-modal col-xs-12 col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
+			<button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+			<form role="form" action="/" method="POST" name="modal-form">
+				<input type="hidden" name="id" value="<%=id%>">
+				<div class="form-group">
+					<label for="name-input">Название услуги</label>
+					<input type="text" name="name" class="form-control" id="name-input" placeholder="услуга" value="<%=name%>">
+				</div>
+				<div class="form-group">
+					<label for="pid-input">Родительская услуга</label>
+					<select name="pid" class="form-control" id="pid-input">
+						<option value=""></option>
+						<%services.forEach(function(service, i) {
+							var pidChecked = (service.get('id') == pid) ? "selected" : "";%>
+							<option <%=pidChecked%> value="<%=service.get('id')%>"><%=service.get('name')%></option>
+						<% }); %>
+					</select>
+				</div>
+				<button id="btn-modal-send" type="button" class="btn btn-default">Сохранить</button>
+			</form>
+		</div>
+	</div>
+</script>
